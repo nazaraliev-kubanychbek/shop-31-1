@@ -5,8 +5,16 @@ import DetailPage from './pages/DetailPage/DetailPage';
 import CartPage from './pages/CartPage/CartPage';
 import Header from './components/Header/Header';
 import './style.scss';
+import { getCategory } from './redux/reducer';
+import {useDispatch} from 'react-redux';
+import { useEffect } from 'react';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(getCategory());
+  }, [])
   return (
     <BrowserRouter>
       <Header />
