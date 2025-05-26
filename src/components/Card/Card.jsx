@@ -1,7 +1,10 @@
 import './card.scss';
 import {Link} from 'react-router-dom';
+import { addCart } from '../../redux/reducer';
+import { useDispatch } from 'react-redux';
 
 const Card = ({ item }) => {
+    const dispatch = useDispatch();
     return (
         <div className="card">
             <Link to={`/product/${item.id}`}
@@ -28,7 +31,9 @@ const Card = ({ item }) => {
             <div className="card-block">
                 <p className="card-text">${item.price}</p>
 
-                <button className="card-btn">buy</button>
+                <button className="card-btn" onClick={()=>{
+                    dispatch(addCart(item))
+                }}>buy</button>
             </div>
         </div>
     );

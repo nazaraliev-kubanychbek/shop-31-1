@@ -1,17 +1,20 @@
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import './detail.scss'
+import './detail.scss';
+import { addCart } from "../../redux/reducer";
+import {useDispatch} from 'react-redux';
 
 const DetailPage = () => {
     const params = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState({});
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         axios(`https://fakestoreapi.com/products/${params.id}`)
         .then(({data})=> setProduct(data))
-    }, [])
+    }, [params])
     return (
         <div className="detail">
             <br />
@@ -29,7 +32,9 @@ const DetailPage = () => {
                         <br />
                         <p>${product.price}</p>
 
-                        <button className="detail-btn">buy</button>
+                        <button className="detail-btn" onClick={()=>{
+                            dispatch(addCart(product))
+                        }}>buy</button>
                         <button className="detail-btn" onClick={()=>{
                             navigate(-1)
                         }}>go back</button>

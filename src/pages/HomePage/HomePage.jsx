@@ -7,7 +7,7 @@ const HomePage = () => {
         <div>
            {
             categories.map(item => {
-                return <CategoryComponent category={item} limit={4} />
+                return <CategoryComponent key={item.id} category={item} limit={4} />
             })
            }
         </div>
